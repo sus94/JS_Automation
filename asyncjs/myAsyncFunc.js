@@ -10,46 +10,57 @@
 // 	log the result from the previous step to the console
 // 	add error handling (use try/catch)
 
-
-// 1
-const loadArray = new Promise((resolve, reject) => {
-    const userList = [
-        {
-            id: 1,
-            name: 'poxos 01'
-        },
-        {
-            id: 2,
-            name: 'poxos 02'
-        },
-        {
-            id: 3,
-            name: 'poxos 03'
-        },
-    ];
-    resolve(userList);
-});
-
-// 2
-const getItem = (array, id) => {
-    return new Promise((resolve, reject) => {
-        const foundingItem = array.find(item => item.id === id);
-        if(foundingItem) {
-            resolve(foundingItem);
-        }else {
-            reject('There is no such item in the array!');
-        }
+function loadArray() {
+    return new Promise(function (resolve) {
+        const arr =	[
+            {
+                'id': 1,
+                'name' : 'Susan'
+        
+            },
+            {
+                'id' : 2,
+                'name' : 'John'
+        
+            },
+        
+            {
+                'id' : 3,
+                'name' : 'Bob'
+        
+            }
+            
+        ];
+        resolve(arr);
     });
-};
+}
 
-// 3
-const myAsyncFunc = async (id) => {
+
+
+function getItem(array, id) {
+    return new Promise((resolve, reject) => {
+        const foundItem = array.find(item => item.id === id);
+        if(foundItem) {
+            resolve(foundItem);
+        }
+        reject('There is no such item in the array!');
+    });
+}
+
+
+async function myAsyncFunc(id) {
     try {
-        await loadArray
-            .then(res => getItem(res, id))
-            .then(res => console.log(res));
-    }catch(err) {
+        const userList = await loadArray();
+        const result = await getItem(userList, id);
+        console.log(result);
+
+        return result;
+    } catch (err) {
         console.log(err);
     }
-};
+}
+
+myAsyncFunc(5);
+myAsyncFunc(1);
+myAsyncFunc(2);
 myAsyncFunc(3);
