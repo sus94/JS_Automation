@@ -13,8 +13,6 @@ function addWithDelay(arr) {
                 setTimeout(() => reject('Error'), 1000); 
             } 
             sum += val;
-
-            return sum;
         });
         setTimeout(() => resolve(sum), 1000);
     });
