@@ -53,8 +53,6 @@ async function myAsyncFunc(id) {
         const userList = await loadArray();
         const result = await getItem(userList, id);
         console.log(result);
-
-        return result;
     } catch (err) {
         console.log(err);
     }
